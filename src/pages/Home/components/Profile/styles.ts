@@ -26,3 +26,30 @@ export const ProfileAvatar = styled.img`
     margin: auto;
   }
 `
+
+export const ProfileDetails = styled.div`
+  width: 100%;
+
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    h2 {
+      line-height: 130%;
+    }
+  }
+
+  & > p {
+    margin-bottom: 1.5rem;
+  }
+`
+export const ProfileInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+`

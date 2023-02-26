@@ -9,7 +9,10 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors['brand-color']};
+    border-radius: 4px;
+    outline-offset: 2px;
+    outline-color: ${({ theme }) => theme.colors['brand-color']};
+    outline-style: solid;
   }
   
   ::-webkit-scrollbar {
