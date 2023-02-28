@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { Profile } from './components/Profile'
+import { Profile, ProfileData } from './components/Profile'
 import { HomeContainer, ReposContainer } from './styles'
 import { githubAPI } from '../../libs/githubAPI'
 import { Spinner } from '../../components/Spinner'
 import { RepoItem } from './components/RepoItem'
+import { SearchForm } from './components/SearchForm'
 
 export interface IRepo {
   id: number
@@ -17,34 +18,60 @@ export interface IRepo {
 }
 
 export function Home() {
+  const [userName, setUserName] = useState('ponqueli')
   const [repos, setRepos] = useState<IRepo[]>([])
   const [isLoadingRepos, setIsLoadingRepos] = useState(false)
   const [animationParent] = useAutoAnimate<HTMLUListElement>()
+  const [profileData, setProfileData] = useState<ProfileData>({} as ProfileData)
+  const [isLoadingProfileData, setIsLoadingProfileData] = useState(false)
 
-  const getReposByUser = useCallback(
-    async (userInputSearch: string = 'ponqueli') => {
+  const getReposByUser = useCallback(async (userName: string = 'ponqueli') => {
+    try {
+      setIsLoadingRepos(true)
+      const { data } = await githubAPI.get(`users/${userName}/repos`, {
+        params: {
+          sort: 'updated',
+        },
+      })
+      setRepos(data)
+    } finally {
+      setIsLoadingRepos(false)
+    }
+  }, [])
+
+  const fetchProfileData = useCallback(
+    async (userName: string = 'ponqueli') => {
       try {
-        setIsLoadingRepos(true)
-        const { data } = await githubAPI.get(`users/${userInputSearch}/repos`, {
-          params: {
-            sort: 'updated',
-          },
-        })
-        setRepos(data)
+        setIsLoadingProfileData(true)
+        const { data } = await githubAPI.get(`/users/${userName}`)
+        setProfileData(data)
+      } catch (error) {
+        console.log(error)
       } finally {
-        setIsLoadingRepos(false)
+        setIsLoadingProfileData(false)
       }
     },
     [],
   )
 
   useEffect(() => {
-    getReposByUser()
-  }, [getReposByUser])
+    getReposByUser(userName)
+  }, [getReposByUser, userName])
+
+  useEffect(() => {
+    fetchProfileData(userName)
+  }, [fetchProfileData, userName])
 
   return (
     <HomeContainer className="container">
-      <Profile />
+      <SearchForm
+        fetchProfileData={fetchProfileData}
+        setUserName={setUserName}
+      />
+      <Profile
+        isLoadingProfileData={isLoadingProfileData}
+        profileData={profileData}
+      />
       <ReposContainer>
         <ul ref={animationParent}>
           {isLoadingRepos ? (

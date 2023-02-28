@@ -7,6 +7,14 @@ export function Router() {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
+        <Route
+          path="*"
+          element={
+            <h2 style={{ marginTop: '5rem', textAlign: 'center' }}>
+              Page not found 404
+            </h2>
+          }
+        />
       </Route>
     </Routes>
   )

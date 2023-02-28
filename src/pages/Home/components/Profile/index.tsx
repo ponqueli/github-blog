@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowUpRightFromSquare,
@@ -13,7 +12,6 @@ import {
   ProfileInfoContainer,
 } from './styles'
 import { Spinner } from '../../../../components/Spinner'
-import { githubAPI } from '../../../../libs/githubAPI'
 import { RegularText, TitleText } from '../../../../components/Typography'
 import { ExternalLink } from '../../../../components/ExternalLink'
 import { InfoWithIcon } from '../../../../components/InfoWithIcon'
@@ -28,28 +26,12 @@ export interface ProfileData {
   followers: number
 }
 
-const username = import.meta.env.VITE_GITHUB_USERNAME
+export interface ProfileProps {
+  isLoadingProfileData: boolean
+  profileData: ProfileData
+}
 
-export function Profile() {
-  const [profileData, setProfileData] = useState<ProfileData>({} as ProfileData)
-  const [isLoadingProfileData, setIsLoadingProfileData] = useState(false)
-
-  const fetchProfileData = useCallback(async () => {
-    try {
-      setIsLoadingProfileData(true)
-      const { data } = await githubAPI.get(`/users/${username}`)
-      setProfileData(data)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoadingProfileData(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchProfileData()
-  }, [fetchProfileData])
-
+export function Profile({ isLoadingProfileData, profileData }: ProfileProps) {
   return (
     <ProfileContainer>
       {isLoadingProfileData ? (
