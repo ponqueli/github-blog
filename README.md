@@ -36,7 +36,7 @@ Ao acessar a aplicação web, o usuário irá se deparar com a página abaixo on
 
 ## Instalação
 
-Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+Tenha instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
 Além disso é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).
 
