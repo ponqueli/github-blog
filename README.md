@@ -4,7 +4,7 @@
 <h3 align="center">
 Um jeito fácil de encontrar os usuários do github e seus projetos 
 </h3>
-<h3 align="center">Acesse a página <a href="https://github-blog-by-ponqueli.vercel.app/" target="_blank">>>aqui<<</a></h3>
+<h3 align="center">Acesse a página <a href="https://github-blog-by-ponqueli.vercel.app/" target="_blank">>aqui<</a></h3>
 
 <br>
 
