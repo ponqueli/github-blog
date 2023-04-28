@@ -38,7 +38,6 @@ Ao acessar a aplicação web, o usuário irá se deparar com a página abaixo on
 
 Tenha instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
-Além disso, é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).
 
 
 ### 🖥️ Rodando o Front End (Web)
